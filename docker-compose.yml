@@ -1,0 +1,16 @@
+services:
+  booklet-imposer:
+    build: .
+    image: booklet-imposer:latest
+    container_name: booklet-imposer
+    restart: unless-stopped
+    ports:
+      # 宿主机端口:容器端口；如 8080 被占用，改冒号左侧即可
+      - "${HOST_PORT:-8080}:3000"
+    environment:
+      # 单个 PDF 上传上限（MB）
+      MAX_UPLOAD_MB: "50"
+      # 拼版任务在内存中保留的分钟数
+      JOB_TTL_MINUTES: "30"
+      # 最多缓存的任务数
+      MAX_JOBS: "20"

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>骑马钉小册子 PDF 拼版</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1>骑马钉小册子拼版</h1>
+    <p class="subtitle">每张纸 4 页 · 自动补空白页 · 保持原页面尺寸输出</p>
+  </header>
+
+  <main class="container">
+    <!-- 上传区 -->
+    <section class="card upload-card">
+      <label id="dropzone" class="dropzone" for="file-input">
+        <input type="file" id="file-input" accept="application/pdf,.pdf" hidden />
+        <div class="dropzone-inner">
+          <div class="drop-icon" aria-hidden="true">📄</div>
+          <div class="drop-text">
+            <strong>点击选择 PDF</strong>，或将文件拖拽到此处
+          </div>
+          <div class="drop-hint">单个文件最大 <span id="max-size-label">50</span> MB</div>
+        </div>
+      </label>
+
+      <div class="options">
+        <label class="checkbox">
+          <input type="checkbox" id="fold-marks" />
+          在每张纸折叠中线添加浅灰参考线
+        </label>
+      </div>
+
+      <div id="error-box" class="error-box" role="alert" hidden></div>
+      <div id="loading" class="loading" hidden>
+        <span class="spinner"></span> 正在拼版，请稍候…
+      </div>
+    </section>
+
+    <!-- 结果区 -->
+    <section id="result" class="result" hidden>
+      <div class="card summary-card">
+        <div class="summary-grid">
+          <div class="summary-item">
+            <span class="summary-num" id="stat-original">-</span>
+            <span class="summary-label">原页数</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-num" id="stat-added">-</span>
+            <span class="summary-label">补空白页</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-num" id="stat-sheets">-</span>
+            <span class="summary-label">纸张数（正反面）</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-num" id="stat-size">-</span>
+            <span class="summary-label">原页面尺寸 (pt)</span>
+          </div>
+        </div>
+
+        <div class="summary-actions">
+          <a id="download-btn" class="btn btn-primary" href="#" download>
+            ⬇ 下载拼版 PDF
+          </a>
+          <span id="result-meta" class="result-meta"></span>
+        </div>
+        <p class="print-tip">
+          打印提示：双面打印请选择 <strong>短边翻转（Flip on short edge）</strong>，
+          打印后沿中线对折、全部纸张中缝套叠，订书钉骑缝装订即成骑马钉小册子。
+        </p>
+      </div>
+
+      <h2 class="sheets-title">纸张页码预览</h2>
+      <div id="sheets" class="sheets"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>Node.js · Express · pdf-lib · 原生前端</span>
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>
